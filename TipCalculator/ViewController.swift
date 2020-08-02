@@ -17,6 +17,9 @@ class ViewController: UIViewController {
     @IBOutlet weak var totalLabel: UILabel!
     @IBOutlet weak var tipControl: UISegmentedControl!
     
+    @IBOutlet weak var peopleField: UITextField!
+    @IBOutlet weak var priceLabel: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -29,10 +32,8 @@ class ViewController: UIViewController {
     }
     
     @IBAction func calculateTip(_ sender: Any) {
-        //Get Bill Amount
         let bill = Double(billField.text!) ?? 0
-        
-        
+
         //Calculate Tip
         let tipPercentages = [0.15, 0.18, 0.2]
 
@@ -41,10 +42,39 @@ class ViewController: UIViewController {
         
         
         let total = bill + tip
+        
+        
         //Update tip and total Labels
         tipLabel.text = String(format: "$%0.2f",tip)
         totalLabel.text  = String(format: "$%0.2f",total)
+    
+        
     }
     
+    @IBAction func calculatePricePerPerson(_ sender: Any) {
+       
+        let amtOfPeople = Double(peopleField.text!) ?? 0
+        
+        let bill = Double(billField.text!) ?? 0
+        //Calculate Tip
+        let tipPercentages = [0.15, 0.18, 0.2]
+        
+        let tip = bill * tipPercentages[tipControl.selectedSegmentIndex]
+        
+        let total = bill + tip
+        
+        let pricePerPerson = total/amtOfPeople
+        
+        priceLabel.text = String(format: "$%0.2f",pricePerPerson)
+    
+    }
+    
+    
+    @IBAction func onTapSplit(_ sender: Any) {
+        print("GoodBye World")
+        view.endEditing(true)
+    }
+    
+  
 }
 
