@@ -38,6 +38,7 @@
                                 <attributedString key="attributedText"/>
                                 <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
                                 <connections>
+                                    <action selector="calculatePricePerPerson:" destination="BYZ-38-t0r" eventType="editingDidEnd" id="LmI-tQ-GlL"/>
                                     <action selector="calculateTip:" destination="BYZ-38-t0r" eventType="editingChanged" id="UQC-8U-74W"/>
                                 </connections>
                             </textField>
@@ -47,7 +48,7 @@
                                 <attributedString key="attributedText"/>
                                 <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
                                 <connections>
-                                    <action selector="calculatePricePerPerson:" destination="BYZ-38-t0r" eventType="editingDidEnd" id="V0D-lC-x9e"/>
+                                    <action selector="calculatePricePerPerson:" destination="BYZ-38-t0r" eventType="editingDidEnd" id="0oA-fm-EoE"/>
                                     <action selector="calculateTip:" destination="BYZ-38-t0r" eventType="editingChanged" id="Fds-hr-aSZ"/>
                                     <action selector="onTapSplit:" destination="BYZ-38-t0r" eventType="editingDidEnd" id="MLr-Q5-I5t"/>
                                 </connections>
@@ -78,6 +79,7 @@
                                     <segment title="20%"/>
                                 </segments>
                                 <connections>
+                                    <action selector="calculatePricePerPerson:" destination="BYZ-38-t0r" eventType="valueChanged" id="7Fw-LX-vlI"/>
                                     <action selector="calculateTip:" destination="BYZ-38-t0r" eventType="valueChanged" id="dbc-ix-OpM"/>
                                 </connections>
                             </segmentedControl>
