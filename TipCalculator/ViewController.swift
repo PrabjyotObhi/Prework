@@ -17,9 +17,14 @@ class ViewController: UIViewController {
     @IBOutlet weak var totalLabel: UILabel!
     @IBOutlet weak var tipControl: UISegmentedControl!
     
+    @IBOutlet weak var externalAppControl: UISegmentedControl!
+    @IBOutlet weak var customTipField: UITextField!
     @IBOutlet weak var peopleField: UITextField!
     @IBOutlet weak var priceLabel: UILabel!
     
+    @IBOutlet weak var sliderLabel: UILabel!
+    
+    @IBOutlet weak var sliderField: UISlider!
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -35,10 +40,15 @@ class ViewController: UIViewController {
         let bill = Double(billField.text!) ?? 0
 
         //Calculate Tip
-        let tipPercentages = [0.15, 0.18, 0.2]
-
+        let tipPercentages = [15.00, 18.00, 20.00, 0.00]
         
-        let tip = bill * tipPercentages[tipControl.selectedSegmentIndex]
+        var potentialTip = tipPercentages[tipControl.selectedSegmentIndex]
+        
+        if  potentialTip == 0 {
+            potentialTip = Double(customTipField.text!) ?? 0
+        }
+    
+        let tip = bill * (potentialTip/100)
         
         
         let total = bill + tip
@@ -52,16 +62,24 @@ class ViewController: UIViewController {
     }
     
     @IBAction func calculatePricePerPerson(_ sender: Any) {
-       
-        let amtOfPeople = Double(peopleField.text!) ?? 0
+       //Figured out ??1 would be what we want to use 
+        let amtOfPeople = Double(peopleField.text!) ?? 1
         
         let bill = Double(billField.text!) ?? 0
         //Calculate Tip
-        let tipPercentages = [0.15, 0.18, 0.2]
+        let tipPercentages = [15.00, 18.00, 20.00, 0.00];
         
-        let tip = bill * tipPercentages[tipControl.selectedSegmentIndex]
+        var potentialTip = tipPercentages[tipControl.selectedSegmentIndex]
         
-        let total = bill + tip
+        if  potentialTip == 0 {
+            potentialTip = Double(customTipField.text!) ?? 0;
+        }
+        sliderField.value = Float(potentialTip);
+
+        sliderLabel.text = String(Double(potentialTip));
+        
+        let tip = bill * (potentialTip/100);
+        let total = bill + tip;
         
         let pricePerPerson = total/amtOfPeople
         
@@ -76,5 +94,27 @@ class ViewController: UIViewController {
     }
     
   
+    @IBAction func useSlider(_ sender: Any) {
+        print("HelloWorld")
+        sliderLabel.text = String((sliderField.value))
+        
+        let tipPercent = Double (sliderLabel.text!) ?? 0
+        
+        let bill = Double(billField.text!) ?? 0
+        
+        print("Tip Percent =", tipPercent)
+        print("Bill = ", bill)
+        print("Bill + tip = ",  bill+bill*((tipPercent)/100))
+    
+    }
+    
+    
+    @IBAction func switchApp(_ sender: Any) {
+        
+        let externalApp = ["Venmo", "Zelle", "CashApp", "Paypal"]
+        let app = externalApp[externalAppControl.selectedSegmentIndex]
+        print("APP =", app)
+        
+    }
 }
 
